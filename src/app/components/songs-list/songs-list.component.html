@@ -1,0 +1,15 @@
+<div class="songs-container">
+    <div class="actions-bar">
+        <button mat-raised-button color="primary" (click)="openAddSongModal()">
+            <mat-icon>add</mat-icon>
+            Add New Song
+        </button>
+    </div>
+
+    @for (song of (songs$ | async) || []; track song.id) {
+        <app-song [song]="song" (deleteSong)="deleteSong(song.id)">
+        </app-song>
+    } @empty {
+        <p>No songs found. Add some songs to get started!</p>
+    }
+</div>

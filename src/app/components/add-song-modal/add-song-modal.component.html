@@ -1,0 +1,60 @@
+<h2 mat-dialog-title>Add New Song</h2>
+
+<mat-dialog-content>
+    <form [formGroup]="songForm" (ngSubmit)="onSubmit()">
+        <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Song Name</mat-label>
+            <input matInput formControlName="name" placeholder="Enter song name" />
+            @if (songForm.get('name')?.invalid && songForm.get('name')?.touched) {
+            <mat-error>Song name is required</mat-error>
+            }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Artist</mat-label>
+            <input matInput formControlName="artist" placeholder="Enter artist name" />
+            @if (songForm.get('artist')?.invalid && songForm.get('artist')?.touched) {
+            <mat-error>Artist name is required</mat-error>
+            }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Genre</mat-label>
+            <mat-select formControlName="genre">
+                @for (genre of genres; track genre) {
+                <mat-option [value]="genre">{{ genre }}</mat-option>
+                }
+            </mat-select>
+            @if (songForm.get('genre')?.invalid && songForm.get('genre')?.touched) {
+            <mat-error>Please select a genre</mat-error>
+            }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Cover URL</mat-label>
+            <input matInput formControlName="coverURL" placeholder="Enter cover image URL" />
+            @if (songForm.get('coverURL')?.invalid && songForm.get('coverURL')?.touched) {
+            <mat-error>Cover URL is required</mat-error>
+            }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Release Date</mat-label>
+            <input matInput type="date" formControlName="releaseDate" />
+            @if (songForm.get('releaseDate')?.invalid && songForm.get('releaseDate')?.touched) {
+                @if (songForm.get('releaseDate')?.hasError('required')) {
+                    <mat-error>Release date is required</mat-error>
+                } @else if (songForm.get('releaseDate')?.hasError('invalidDate')) {
+                    <mat-error>Please enter a valid date</mat-error>
+                }
+            }
+        </mat-form-field>
+    </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <button mat-button type="button" (click)="onCancel()">Cancel</button>
+    <button mat-raised-button color="primary" type="button" (click)="onSubmit()" [disabled]="songForm.invalid">
+        Add Song
+    </button>
+</mat-dialog-actions>

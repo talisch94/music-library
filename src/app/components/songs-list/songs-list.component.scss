@@ -1,0 +1,40 @@
+.songs-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+
+    .actions-bar {
+        grid-column: 1 / -1;
+        display: flex;
+        justify-content: center;
+        margin-bottom: 2rem;
+        
+        button {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1rem;
+            padding: 0.75rem 1.5rem;
+        }
+    }
+
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+
+    p {
+        text-align: center;
+        font-size: 1.2rem;
+        color: var(--mat-sys-on-surface-variant);
+        margin: 2rem 0;
+        grid-column: 1 / -1;
+        
+        &.error {
+            color: var(--mat-sys-error);
+            background-color: var(--mat-sys-error-container);
+            padding: 1rem;
+            border-radius: 8px;
+            border: 1px solid var(--mat-sys-error);
+        }
+    }
+}
